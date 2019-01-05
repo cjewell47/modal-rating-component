@@ -12,31 +12,106 @@
             <div class="modal-rating-wrapper">
               <h4>How would your rate your food?</h4>
               <div class="modal-rating-stars">
-                <button data-index="1"></button>
-                <button data-index="2"></button>
-                <button data-index="3"></button>
-                <button data-index="4"></button>
-                <button data-index="5"></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="food"
+                  data-index="1"
+                  @click="starClick"
+                ></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="food"
+                  data-index="2"
+                  @click="starClick"
+                ></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="food"
+                  data-index="3"
+                  @click="starClick"
+                ></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="food"
+                  data-index="4"
+                  @click="starClick"
+                ></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="food"
+                  data-index="5"
+                  @click="starClick"
+                ></button>
               </div>
             </div>
             <div class="modal-rating-wrapper">
               <h4>How would your rate your delivery driver?</h4>
               <div class="modal-rating-stars">
-                <button data-index="1"></button>
-                <button data-index="2"></button>
-                <button data-index="3"></button>
-                <button data-index="4"></button>
-                <button data-index="5"></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="delivery"
+                  data-index="1"
+                  @click="starClick"
+                ></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="delivery"
+                  data-index="2"
+                  @click="starClick"
+                ></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="delivery"
+                  data-index="3"
+                  @click="starClick"
+                ></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="delivery"
+                  data-index="4"
+                  @click="starClick"
+                ></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="delivery"
+                  data-index="5"
+                  @click="starClick"
+                ></button>
               </div>
             </div>
             <div class="modal-rating-wrapper">
               <h4>How would your rate your overall experience?</h4>
               <div class="modal-rating-stars">
-                <button data-index="1"></button>
-                <button data-index="2"></button>
-                <button data-index="3"></button>
-                <button data-index="4"></button>
-                <button data-index="5"></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="overall"
+                  data-index="1"
+                  @click="starClick"
+                ></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="overall"
+                  data-index="2"
+                  @click="starClick"
+                ></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="overall"
+                  data-index="3"
+                  @click="starClick"
+                ></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="overall"
+                  data-index="4"
+                  @click="starClick"
+                ></button>
+                <button
+                  class="modal-rating-stars"
+                  data-type="overall"
+                  data-index="5"
+                  @click="starClick"
+                ></button>
               </div>
             </div>
           </div>
@@ -55,9 +130,21 @@ export default {
   name: "modal",
   data() {
     return {
-      // greyStar: 'star.svg',
-      // goldStar: 'star-gold.svg'
+        ratings: {
+            food: 0,
+            delivery: 0,
+            overall: 0
+        }
     };
+  },
+  methods: {
+    starClick: function(e) {
+      const category = e.target.getAttribute("data-type");
+      const rating = e.target.getAttribute("data-index");
+      console.log(category, rating);
+      this.ratings[category] = rating;
+      console.log(this.ratings)
+    }
   }
 };
 </script>
@@ -109,22 +196,16 @@ export default {
       height: 20px;
       width: 20px;
       position: relative;
-      &::before {
-        content: "";
-        display: inline-block;
-        background-image: url("../assets/star.svg");
-        background-size: cover;
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 20px;
-        width: 20px;
-      }
+      background-image: url("../assets/star.svg");
+      background-size: cover;
+      transition: all 0.4s ease;
       &:hover {
         cursor: pointer;
-        &::before {
-          background-image: url("../assets/star-gold.svg");
-        }
+        background-image: url("../assets/star-gold.svg");
+        transform: scale(1.2);
+      }
+      &.selected {
+        background-image: url("../assets/star-gold.svg");
       }
     }
   }
