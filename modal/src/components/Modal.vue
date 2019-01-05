@@ -17,7 +17,7 @@
                   data-type="food"
                   data-index="1"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
                 <button
@@ -25,7 +25,7 @@
                   data-type="food"
                   data-index="2"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
                 <button
@@ -33,7 +33,7 @@
                   data-type="food"
                   data-index="3"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
                 <button
@@ -41,7 +41,7 @@
                   data-type="food"
                   data-index="4"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
                 <button
@@ -49,7 +49,7 @@
                   data-type="food"
                   data-index="5"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
               </div>
@@ -62,7 +62,7 @@
                   data-type="delivery"
                   data-index="1"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
                 <button
@@ -70,7 +70,7 @@
                   data-type="delivery"
                   data-index="2"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
                 <button
@@ -78,7 +78,7 @@
                   data-type="delivery"
                   data-index="3"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
                 <button
@@ -86,7 +86,7 @@
                   data-type="delivery"
                   data-index="4"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
                 <button
@@ -94,7 +94,7 @@
                   data-type="delivery"
                   data-index="5"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
               </div>
@@ -107,7 +107,7 @@
                   data-type="overall"
                   data-index="1"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
                 <button
@@ -115,7 +115,7 @@
                   data-type="overall"
                   data-index="2"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
                 <button
@@ -123,7 +123,7 @@
                   data-type="overall"
                   data-index="3"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
                 <button
@@ -131,7 +131,7 @@
                   data-type="overall"
                   data-index="4"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
                 <button
@@ -139,14 +139,15 @@
                   data-type="overall"
                   data-index="5"
                   @click="starClick"
-                  @mouseover="starHover"
+                  @mouseover="starEnter"
                   @mouseleave="starLeave"
                 ></button>
               </div>
             </div>
           </div>
-
-          <button class="modal-default-button" @click="$emit('close')">
+          <button class="modal-submit-button">Submit Feedback</button>
+          
+          <button class="modal-close-button" @click="$emit('close')">
             <img src="../assets/close.svg" alt="close-icon">
           </button>
         </div>
@@ -186,7 +187,7 @@ export default {
         }
       });
     },
-    starHover: function(e) {
+    starEnter: function(e) {
       const category = e.target.getAttribute("data-type");
       const rating = e.target.getAttribute("data-index");
       const selected = Array.from(
@@ -197,8 +198,6 @@ export default {
       selected.forEach((star, index) => {
         if (index < rating) {
           star.classList.add("star-hover");
-        } else {
-          star.classList.remove("star-hover");
         }
       });
     },
@@ -210,8 +209,8 @@ export default {
           '.modal-rating-stars[data-type="' + category + '"]'
         )
       );
-      selected.forEach((star) => {
-          star.classList.remove("star-hover");
+      selected.forEach(star => {
+        star.classList.remove("star-hover");
       });
     }
   }
@@ -219,6 +218,11 @@ export default {
 </script>
 
 <style lang="scss">
+button {
+  &:hover {
+    cursor: pointer;
+  }
+}
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -269,7 +273,6 @@ export default {
       background-size: cover;
       transition: all 0.4s ease;
       &:hover {
-        cursor: pointer;
         transform: scale(1.2);
       }
       &.selected {
@@ -285,7 +288,21 @@ export default {
   }
 }
 
-.modal-default-button {
+.modal-submit-button {
+  background: #ce3079;
+  color: #fff;
+  font-size: 16px;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px 20px;
+  transition: all 0.5s ease;
+  &:hover {
+      transform: scale(1.1);
+      background: darken($color: #ce3079, $amount: 20)
+  }
+}
+
+.modal-close-button {
   float: right;
   background: transparent;
   border: 0;
@@ -294,7 +311,6 @@ export default {
   top: -8px;
   right: -12px;
   &:hover {
-    cursor: pointer;
     transform: scale(1.2);
   }
   &:focus {
