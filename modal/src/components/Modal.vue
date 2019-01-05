@@ -17,30 +17,40 @@
                   data-type="food"
                   data-index="1"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
                 <button
                   class="modal-rating-stars"
                   data-type="food"
                   data-index="2"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
                 <button
                   class="modal-rating-stars"
                   data-type="food"
                   data-index="3"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
                 <button
                   class="modal-rating-stars"
                   data-type="food"
                   data-index="4"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
                 <button
                   class="modal-rating-stars"
                   data-type="food"
                   data-index="5"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
               </div>
             </div>
@@ -52,30 +62,40 @@
                   data-type="delivery"
                   data-index="1"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
                 <button
                   class="modal-rating-stars"
                   data-type="delivery"
                   data-index="2"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
                 <button
                   class="modal-rating-stars"
                   data-type="delivery"
                   data-index="3"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
                 <button
                   class="modal-rating-stars"
                   data-type="delivery"
                   data-index="4"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
                 <button
                   class="modal-rating-stars"
                   data-type="delivery"
                   data-index="5"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
               </div>
             </div>
@@ -87,30 +107,40 @@
                   data-type="overall"
                   data-index="1"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
                 <button
                   class="modal-rating-stars"
                   data-type="overall"
                   data-index="2"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
                 <button
                   class="modal-rating-stars"
                   data-type="overall"
                   data-index="3"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
                 <button
                   class="modal-rating-stars"
                   data-type="overall"
                   data-index="4"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
                 <button
                   class="modal-rating-stars"
                   data-type="overall"
                   data-index="5"
                   @click="starClick"
+                  @mouseover="starHover"
+                  @mouseleave="starLeave"
                 ></button>
               </div>
             </div>
@@ -130,11 +160,11 @@ export default {
   name: "modal",
   data() {
     return {
-        ratings: {
-            food: 0,
-            delivery: 0,
-            overall: 0
-        }
+      ratings: {
+        food: 0,
+        delivery: 0,
+        overall: 0
+      }
     };
   },
   methods: {
@@ -143,13 +173,46 @@ export default {
       const rating = e.target.getAttribute("data-index");
       console.log(category, rating);
       this.ratings[category] = rating;
-      const selected = Array.from(document.querySelectorAll('.modal-rating-stars[data-type="'+category+'"]'))
+      const selected = Array.from(
+        document.querySelectorAll(
+          '.modal-rating-stars[data-type="' + category + '"]'
+        )
+      );
       selected.forEach((star, index) => {
-        console.log(star)
         if (index < rating) {
-            star.classList.add('selected');
+          star.classList.add("selected");
+        } else {
+          star.classList.remove("selected");
         }
-      })
+      });
+    },
+    starHover: function(e) {
+      const category = e.target.getAttribute("data-type");
+      const rating = e.target.getAttribute("data-index");
+      const selected = Array.from(
+        document.querySelectorAll(
+          '.modal-rating-stars[data-type="' + category + '"]'
+        )
+      );
+      selected.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.add("star-hover");
+        } else {
+          star.classList.remove("star-hover");
+        }
+      });
+    },
+    starLeave: function(e) {
+      const category = e.target.getAttribute("data-type");
+      const rating = e.target.getAttribute("data-index");
+      const selected = Array.from(
+        document.querySelectorAll(
+          '.modal-rating-stars[data-type="' + category + '"]'
+        )
+      );
+      selected.forEach((star) => {
+          star.classList.remove("star-hover");
+      });
     }
   }
 };
@@ -207,14 +270,16 @@ export default {
       transition: all 0.4s ease;
       &:hover {
         cursor: pointer;
-        background-image: url("../assets/star-gold.svg");
         transform: scale(1.2);
       }
       &.selected {
         background-image: url("../assets/star-gold.svg");
       }
+      &.star-hover {
+        background-image: url("../assets/star-gold.svg");
+      }
       &:focus {
-          outline: 0;
+        outline: 0;
       }
     }
   }
