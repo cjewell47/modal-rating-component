@@ -2,8 +2,9 @@
   <div id="app">
     <div class="home-container">
       <img class="home-chef" src="./assets/luigi.png" alt="Luigi">
-      <button id="show-modal" @click="showModal = true">Rate our service!</button>
-      <div>{{ averageRatings }}</div>
+      <p>Our average food rating is {{ averageRatings.food }} out of 5, our average rating for delivery is {{ averageRatings.delivery }} out of 5, and our overall rating is {{ averageRatings.overall }} our of 5.</p>
+      <p>How did you find our service?</p>
+      <button id="show-modal" @click="showModal = true">Give your rating!</button>
     </div>
     <modal v-if="showModal" @close="showModal = false" @submitRatings="updateRatings($event)"></modal>
   </div>
@@ -56,6 +57,9 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  }
 .home-container {
   margin: auto;
   padding: 40px;
@@ -63,7 +67,11 @@ export default {
   .home-chef {
     display: block;
     margin: auto;
-    padding: 30px;
+  }
+  p {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px 20px 0;
   }
   #show-modal {
     background: #ce3079;
@@ -72,8 +80,10 @@ export default {
     border: 0;
     border-radius: 4px;
     padding: 10px 20px;
+    margin: 20px;
     transition: all 0.5s ease;
     &:hover {
+      cursor: pointer;
       transform: scale(1.1);
       background: darken($color: #ce3079, $amount: 10);
     }
