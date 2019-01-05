@@ -143,7 +143,13 @@ export default {
       const rating = e.target.getAttribute("data-index");
       console.log(category, rating);
       this.ratings[category] = rating;
-      console.log(this.ratings)
+      const selected = Array.from(document.querySelectorAll('.modal-rating-stars[data-type="'+category+'"]'))
+      selected.forEach((star, index) => {
+        console.log(star)
+        if (index < rating) {
+            star.classList.add('selected');
+        }
+      })
     }
   }
 };
@@ -206,6 +212,9 @@ export default {
       }
       &.selected {
         background-image: url("../assets/star-gold.svg");
+      }
+      &:focus {
+          outline: 0;
       }
     }
   }
