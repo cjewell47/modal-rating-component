@@ -9,6 +9,49 @@
 
           <div class="modal-body">
             <p>Please let us know how our food delvery was. It will really help us to keep improving our service.</p>
+            <div class="modal-rating-wrapper">
+              <h4>How would your rate your food?</h4>
+              <div class="modal-rating-stars">
+                <button data-index="1">
+                </button>
+                <button data-index="2">
+                </button>
+                <button data-index="3">
+                </button>
+                <button data-index="4">
+                </button>
+                <button data-index="5">
+                </button>
+              </div>
+            </div>
+            <div class="modal-rating-wrapper">
+              <h4>How would your rate your delivery driver?</h4>
+              <div class="modal-rating-stars">
+                <button data-index="1">
+                </button>
+                <button data-index="2">
+                </button>
+                <button data-index="3">
+                </button>
+                <button data-index="4">
+                </button>
+                <button data-index="5">
+                </button>
+            </div>
+            <div class="modal-rating-wrapper">
+              <h4>How would your rate your overall experience?</h4>
+              <div class="modal-rating-stars">
+                <button data-index="1">
+                </button>
+                <button data-index="2">
+                </button>
+                <button data-index="3">
+                </button>
+                <button data-index="4">
+                </button>
+                <button data-index="5">
+                </button>
+            </div>
           </div>
 
           <button class="modal-default-button" @click="$emit('close')">
@@ -24,7 +67,10 @@
 export default {
   name: "modal",
   data() {
-    return {};
+    return {
+      // greyStar: 'star.svg',
+      // goldStar: 'star-gold.svg'
+    };
   }
 };
 </script>
@@ -65,6 +111,36 @@ export default {
 
 .modal-body {
   margin: 20px 0;
+  .modal-rating-stars {
+    display: flex;
+    justify-content: center;
+    button {
+      background: transparent;
+      border: 0;
+      padding: 0;
+      margin: 1px 7px;
+      height: 20px;
+      width: 20px;
+      position: relative;
+      &::before {
+        content: "";
+        display: inline-block;
+        background-image: url("../assets/star.svg");
+        background-size: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+      }
+      &:hover {
+        cursor: pointer;
+        &::before {
+          background-image: url("../assets/star-gold.svg");
+        }
+      }
+    }
+  }
 }
 
 .modal-default-button {
