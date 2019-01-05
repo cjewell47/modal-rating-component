@@ -223,9 +223,9 @@ export default {
         this.zeroRating = true;
         this.zeroErrorOnce = true
       } else {
-        console.log(this.ratings);
         this.zeroRating = false;
         this.submitted = true;
+        this.$emit('submitRatings', this.ratings)
       }
     }
   }
@@ -280,7 +280,7 @@ button {
       background: transparent;
       border: 0;
       padding: 0;
-      margin: 1px 7px;
+      margin: 1px 3px;
       height: 20px;
       width: 20px;
       position: relative;
@@ -316,7 +316,7 @@ button {
   transition: all 0.5s ease;
   &:hover {
     transform: scale(1.1);
-    background: darken($color: #ce3079, $amount: 20);
+    background: darken($color: #ce3079, $amount: 10);
   }
   &:focus {
       outline: 0;
