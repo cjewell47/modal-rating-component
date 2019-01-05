@@ -144,8 +144,14 @@
                 ></button>
               </div>
             </div>
-            <p class="modal-rating-submit-message" v-if="submitted">Thank you for submitting these ratings</p>
-            <p class="modal-rating-zero-message" v-if="zeroRating">You have left some ratings as 0. Click submit again to confirm these ratings</p>
+            <p
+              class="modal-rating-submit-message"
+              v-if="submitted"
+            >Thank you for submitting these ratings</p>
+            <p
+              class="modal-rating-zero-message"
+              v-if="zeroRating"
+            >You have left some ratings as 0. Click submit again to confirm these ratings</p>
           </div>
           <button v-if="!submitted" class="modal-submit-button" @click="submitClick">Submit Feedback</button>
           
@@ -219,13 +225,18 @@ export default {
       });
     },
     submitClick: function() {
-      if ((this.ratings.food === 0 || this.ratings.delivery === 0 || this.ratings.overall === 0) && !this.zeroErrorOnce) {
+      if (
+        (this.ratings.food === 0 ||
+          this.ratings.delivery === 0 ||
+          this.ratings.overall === 0) &&
+        !this.zeroErrorOnce
+      ) {
         this.zeroRating = true;
-        this.zeroErrorOnce = true
+        this.zeroErrorOnce = true;
       } else {
         this.zeroRating = false;
         this.submitted = true;
-        this.$emit('submitRatings', this.ratings)
+        this.$emit("submitRatings", this.ratings);
       }
     }
   }
@@ -255,7 +266,7 @@ button {
 }
 
 .modal-container {
-  width: 300px;
+  max-width: 300px;
   position: relative;
   margin: 0px auto;
   padding: 20px 30px;
@@ -319,7 +330,7 @@ button {
     background: darken($color: #ce3079, $amount: 10);
   }
   &:focus {
-      outline: 0;
+    outline: 0;
   }
 }
 
@@ -350,5 +361,11 @@ button {
 .modal-fade-enter-active,
 .modal-fade-leave-active {
   transition: opacity 0.5s ease;
+}
+
+@media screen and (max-width: 425px) {
+  .modal-container {
+    width: 240px;
+  }
 }
 </style>
