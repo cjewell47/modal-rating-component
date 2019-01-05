@@ -144,9 +144,10 @@
                 ></button>
               </div>
             </div>
-            <p class="modal-rating-zero-message" v-bind:class="{ active: zeroRating }">You have left some ratings as 0. Click submit again to confirm these ratings</p>
+            <p class="modal-rating-submit-message" v-if="submitted">Thank you for submitting these ratings</p>
+            <p class="modal-rating-zero-message" v-if="zeroRating">You have left some ratings as 0. Click submit again to confirm these ratings</p>
           </div>
-          <button class="modal-submit-button" @click="submitClick">Submit Feedback</button>
+          <button v-if="!submitted" class="modal-submit-button" @click="submitClick">Submit Feedback</button>
           
           <button class="modal-close-button" @click="$emit('close')">
             <img src="../assets/close.svg" alt="close-icon">
@@ -167,7 +168,9 @@ export default {
         delivery: 0,
         overall: 0
       },
-      zeroRating: false
+      zeroRating: false,
+      submitted: false,
+      zeroErrorOnce: false
     };
   },
   methods: {
@@ -216,10 +219,13 @@ export default {
       });
     },
     submitClick: function() {
-      if ((this.ratings.food === 0 || this.ratings.delivery === 0 || this.ratings.overall === 0) && !document.querySelector('.modal-rating-zero-message.active')) {
+      if ((this.ratings.food === 0 || this.ratings.delivery === 0 || this.ratings.overall === 0) && !this.zeroErrorOnce) {
         this.zeroRating = true;
+        this.zeroErrorOnce = true
       } else {
         console.log(this.ratings);
+        this.zeroRating = false;
+        this.submitted = true;
       }
     }
   }
@@ -297,10 +303,6 @@ button {
   }
   .modal-rating-zero-message {
     color: red;
-    opacity: 0;
-    &.active {
-      opacity: 1;
-    }
   }
 }
 
@@ -315,6 +317,9 @@ button {
   &:hover {
     transform: scale(1.1);
     background: darken($color: #ce3079, $amount: 20);
+  }
+  &:focus {
+      outline: 0;
   }
 }
 
