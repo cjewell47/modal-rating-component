@@ -6,7 +6,7 @@
       <p>How did you find our service?</p>
       <button id="show-modal" @click="showModal = true">Give your rating!</button>
     </div>
-    <modal v-if="showModal" @close="showModal = false" @submitRatings="updateRatings($event)"></modal>
+    <modal v-if="showModal" @close-modal="showModal = false" @submitRatings="updateRatings($event)"></modal>
   </div>
 </template>
 
@@ -22,15 +22,16 @@ export default {
     return {
       showModal: false,
       ratings: {
-        food: [4, 4],
-        delivery: [5, 3],
-        overall: [4, 3]
+        food: [4, 4, 3],
+        delivery: [5, 3, 4],
+        overall: [4, 3, 4]
       }
     };
   },
   methods: {
     updateRatings: function(newRatings) {
       console.log("new ratings", newRatings);
+      // would put a post request here submit ratings
       this.ratings.food.push(parseInt(newRatings.food));
       this.ratings.delivery.push(parseInt(newRatings.delivery));
       this.ratings.overall.push(parseInt(newRatings.overall));

@@ -144,10 +144,10 @@
                 ></button>
               </div>
             </div>
-            <p
-              class="modal-rating-submit-message"
-              v-if="submitted"
-            >Thank you for submitting these ratings</p>
+            <div v-if="submitted">
+              <p class="modal-rating-submit-message">Thank you for submitting these ratings</p>
+              <button class="modal-thankyou-close-button" @click="$emit('close-modal')">Close</button>
+            </div>
             <p
               class="modal-rating-zero-message"
               v-if="zeroRating"
@@ -155,7 +155,7 @@
           </div>
           <button v-if="!submitted" class="modal-submit-button" @click="submitClick">Submit Feedback</button>
           
-          <button class="modal-close-button" @click="$emit('close')">
+          <button class="modal-close-button" @click="$emit('close-modal')">
             <img src="../assets/close.svg" alt="close-icon">
           </button>
         </div>
@@ -350,6 +350,22 @@ button {
   }
   img {
     height: 25px;
+  }
+}
+
+.modal-thankyou-close-button {
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+  border: 0;
+  border-radius: 4px;
+  padding: 10px 20px;
+  transition: all 0.5s ease;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:focus {
+    outline: 0;
   }
 }
 
