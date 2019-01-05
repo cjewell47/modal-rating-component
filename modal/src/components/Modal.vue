@@ -144,8 +144,9 @@
                 ></button>
               </div>
             </div>
+            <p class="modal-rating-zero-message" v-bind:class="{ active: zeroRating }">You have left some ratings as 0. Click submit again to confirm these ratings</p>
           </div>
-          <button class="modal-submit-button">Submit Feedback</button>
+          <button class="modal-submit-button" @click="submitClick">Submit Feedback</button>
           
           <button class="modal-close-button" @click="$emit('close')">
             <img src="../assets/close.svg" alt="close-icon">
@@ -165,7 +166,8 @@ export default {
         food: 0,
         delivery: 0,
         overall: 0
-      }
+      },
+      zeroRating: false
     };
   },
   methods: {
@@ -212,6 +214,13 @@ export default {
       selected.forEach(star => {
         star.classList.remove("star-hover");
       });
+    },
+    submitClick: function() {
+      if ((this.ratings.food === 0 || this.ratings.delivery === 0 || this.ratings.overall === 0) && !document.querySelector('.modal-rating-zero-message.active')) {
+        this.zeroRating = true;
+      } else {
+        console.log(this.ratings);
+      }
     }
   }
 };
@@ -286,6 +295,13 @@ button {
       }
     }
   }
+  .modal-rating-zero-message {
+    color: red;
+    opacity: 0;
+    &.active {
+      opacity: 1;
+    }
+  }
 }
 
 .modal-submit-button {
@@ -297,8 +313,8 @@ button {
   padding: 10px 20px;
   transition: all 0.5s ease;
   &:hover {
-      transform: scale(1.1);
-      background: darken($color: #ce3079, $amount: 20)
+    transform: scale(1.1);
+    background: darken($color: #ce3079, $amount: 20);
   }
 }
 
