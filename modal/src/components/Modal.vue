@@ -12,45 +12,32 @@
             <div class="modal-rating-wrapper">
               <h4>How would your rate your food?</h4>
               <div class="modal-rating-stars">
-                <button data-index="1">
-                </button>
-                <button data-index="2">
-                </button>
-                <button data-index="3">
-                </button>
-                <button data-index="4">
-                </button>
-                <button data-index="5">
-                </button>
+                <button data-index="1"></button>
+                <button data-index="2"></button>
+                <button data-index="3"></button>
+                <button data-index="4"></button>
+                <button data-index="5"></button>
               </div>
             </div>
             <div class="modal-rating-wrapper">
               <h4>How would your rate your delivery driver?</h4>
               <div class="modal-rating-stars">
-                <button data-index="1">
-                </button>
-                <button data-index="2">
-                </button>
-                <button data-index="3">
-                </button>
-                <button data-index="4">
-                </button>
-                <button data-index="5">
-                </button>
+                <button data-index="1"></button>
+                <button data-index="2"></button>
+                <button data-index="3"></button>
+                <button data-index="4"></button>
+                <button data-index="5"></button>
+              </div>
             </div>
             <div class="modal-rating-wrapper">
               <h4>How would your rate your overall experience?</h4>
               <div class="modal-rating-stars">
-                <button data-index="1">
-                </button>
-                <button data-index="2">
-                </button>
-                <button data-index="3">
-                </button>
-                <button data-index="4">
-                </button>
-                <button data-index="5">
-                </button>
+                <button data-index="1"></button>
+                <button data-index="2"></button>
+                <button data-index="3"></button>
+                <button data-index="4"></button>
+                <button data-index="5"></button>
+              </div>
             </div>
           </div>
 
