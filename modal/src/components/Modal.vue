@@ -236,7 +236,7 @@ export default {
       } else {
         this.zeroRating = false;
         this.submitted = true;
-        this.$emit("submitRatings", this.ratings);
+        this.$emit("submitRatings", JSON.stringify(this.ratings));
       }
     }
   }

@@ -4,7 +4,7 @@
       <img class="home-chef" src="./assets/luigi.png" alt="Luigi">
       <p>Our average food rating is {{ averageRatings.food }} out of 5, our average rating for delivery is {{ averageRatings.delivery }} out of 5, and our overall rating is {{ averageRatings.overall }} our of 5.</p>
       <p>How did you find our service?</p>
-      <button id="show-modal" @click="showModal = true">Give your rating!</button>
+      <button id="show-modal" @click="showModal = true">Give us a rating</button>
     </div>
     <modal v-if="showModal" @close-modal="showModal = false" @submitRatings="updateRatings($event)"></modal>
   </div>
@@ -30,6 +30,7 @@ export default {
   },
   methods: {
     updateRatings: function(newRatings) {
+      newRatings = JSON.parse(newRatings);
       console.log("new ratings", newRatings);
       // would put a post request here submit ratings
       this.ratings.food.push(parseInt(newRatings.food));
