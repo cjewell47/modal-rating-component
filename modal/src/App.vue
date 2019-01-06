@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       showModal: false,
+      // some dummy ratings
       ratings: {
         food: [4, 4, 3],
         delivery: [5, 3, 4],

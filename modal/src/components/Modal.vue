@@ -184,6 +184,7 @@ export default {
       const category = e.target.getAttribute("data-type");
       const rating = e.target.getAttribute("data-index");
       console.log(category, rating);
+      // add the rating to the data
       this.ratings[category] = rating;
       const selected = Array.from(
         document.querySelectorAll(
@@ -191,6 +192,7 @@ export default {
         )
       );
       selected.forEach((star, index) => {
+        // add gold star class to all stars up the clicked
         if (index < rating) {
           star.classList.add("selected");
         } else {
@@ -199,6 +201,7 @@ export default {
       });
     },
     starEnter: function(e) {
+      // turn relevant stars gold when mouse enters
       const category = e.target.getAttribute("data-type");
       const rating = e.target.getAttribute("data-index");
       const selected = Array.from(
@@ -213,6 +216,7 @@ export default {
       });
     },
     starLeave: function(e) {
+      // turn stars back to grey when mouse leaves
       const category = e.target.getAttribute("data-type");
       const rating = e.target.getAttribute("data-index");
       const selected = Array.from(
@@ -225,6 +229,7 @@ export default {
       });
     },
     submitClick: function() {
+      // if some categories are left zero upon the first click display 'are you sure' message
       if (
         (this.ratings.food === 0 ||
           this.ratings.delivery === 0 ||
@@ -234,6 +239,7 @@ export default {
         this.zeroRating = true;
         this.zeroErrorOnce = true;
       } else {
+        // when submitted, remove 'are you sure' message, and show thanks message
         this.zeroRating = false;
         this.submitted = true;
         this.$emit("submitRatings", JSON.stringify(this.ratings));
